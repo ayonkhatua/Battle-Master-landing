@@ -1,12 +1,8 @@
 {
   "mcpServers": {
-    "firebase": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "firebase-tools@latest",
-        "experimental:mcp"
-      ]
+    "Supabase": {
+      "command": "http",
+      "args": https://mcp.supabase.com/mcp?project_ref=fgzfnuvybjeedlbghjue]
     }
   }
 }
