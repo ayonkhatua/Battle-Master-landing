@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   // 🌟 Base URL set karna zaroori hai Next.js SEO ke liye
   metadataBase: new URL("https://battlemasterofficial.vercel.app"),
   
+  // 🌟 Google Site Verification (HTML Tag Method)
+  verification: {
+    google: "1edyY0tW1DIAF74zg2J3DopSll_MQuowKfhYtSRcp6o", 
+  },
+
   // 🌟 Primary Meta Tags
   title: "Battle Master - Play Free Fire Tournaments & Earn Coins",
   description: "Join Battle Master, the ultimate platform for Free Fire custom room tournaments. Play Solo, Duo, or Squad matches and win real prizes daily!",
@@ -34,8 +39,8 @@ export const metadata: Metadata = {
     siteName: "Battle Master",
     images: [
       {
-        url: "/logo.png", // 🌟 Changed to logo
-        width: 800, // Square dimension logo ke liye best hai
+        url: "/logo.png", 
+        width: 800, 
         height: 800,
         alt: "Battle Master Official Logo",
       },
@@ -46,10 +51,10 @@ export const metadata: Metadata = {
   
   // 🌟 Twitter Card (X/Twitter par share karne ke liye)
   twitter: {
-    card: "summary", // 🌟 Logo ke liye 'summary' card use hota hai
+    card: "summary", 
     title: "Battle Master - Free Fire Esports",
     description: "Join daily FF custom rooms and win real rewards!",
-    images: ["/logo.png"], // 🌟 Changed to logo
+    images: ["/logo.png"], 
   },
 };
 
