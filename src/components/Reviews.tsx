@@ -10,7 +10,7 @@ export default function Reviews() {
   const [reviews, setReviews] = useState<any[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // 🔥 NAYA: Screen par error/success dikhane ke liye state
+  // 🔥 NEW: State to show error/success feedback on the screen
   const [feedback, setFeedback] = useState<{type: 'error' | 'success' | null, msg: string}>({type: null, msg: ''});
 
   useEffect(() => {
@@ -44,7 +44,8 @@ export default function Reviews() {
     setFeedback({ type: null, msg: "" }); // Reset message
 
     if (!email || !reviewText) {
-      setFeedback({ type: 'error', msg: "Bhai, Email aur Review dono zaroori hain!" });
+      // Translated from: "Email aur Review dono zaroori hain!"
+      setFeedback({ type: 'error', msg: "Both Email and Review are required!" });
       return;
     }
     
@@ -58,14 +59,14 @@ export default function Reviews() {
 
       setEmail("");
       setReviewText("");
-      setFeedback({ type: 'success', msg: "Review Submit ho gaya! Niche list mein check karo. 🔥" });
+      setFeedback({ type: 'success', msg: "The review has been submitted! Check the list below." });
       
-      // 3 second baad success message hata do
+      // Remove the success message after 3 seconds
       setTimeout(() => setFeedback({ type: null, msg: "" }), 3000);
 
     } catch (error: any) {
       console.error("Error adding review:", error);
-      // 🔥 NAYA: Asli error screen par dikhega
+      // 🔥 NEW: Actual error will be shown on the screen
       setFeedback({ type: 'error', msg: `Supabase Error: ${error.message}` });
     } finally {
       setIsSubmitting(false);
@@ -78,13 +79,13 @@ export default function Reviews() {
         
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-black mb-4">PLAYER <span className="text-indigo-400">REVIEWS</span></h2>
-          <p className="text-slate-400">Dekho hamare pro players ka kya kehna hai Battle Master ke baare mein.</p>
+          <p className="text-slate-400">See what our pro players have to say about Battle Master.</p>
         </div>
 
         {/* Rating Form */}
         <div className="bg-slate-900/50 p-6 md:p-8 rounded-3xl border border-slate-800 mb-12 shadow-xl">
           
-          {/* 🔥 NAYA: Feedback Message UI */}
+          {/* 🔥 NEW: Feedback Message UI */}
           {feedback.type && (
             <div className={`p-4 rounded-xl mb-6 flex items-center gap-3 font-bold ${feedback.type === 'error' ? 'bg-red-500/10 text-red-400 border border-red-500/30' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'}`}>
               {feedback.type === 'error' ? <AlertCircle className="w-5 h-5" /> : <CheckCircle2 className="w-5 h-5" />}
@@ -132,7 +133,7 @@ export default function Reviews() {
         {/* Reviews List */}
         <div className="space-y-4">
           {reviews.length === 0 ? (
-            <p className="text-center text-slate-500 italic">Abhi tak koi review nahi aaya. Be the first!</p>
+            <p className="text-center text-slate-500 italic">No reviews yet. Be the first!</p>
           ) : (
             reviews.map((rev) => (
               <div key={rev.id} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
