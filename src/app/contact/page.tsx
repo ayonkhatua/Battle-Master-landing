@@ -2,19 +2,45 @@
 import React, { useState } from "react";
 import { Mail, MessageSquare, ArrowLeft, Send, Headphones } from "lucide-react";
 import Link from "next/link";
+// 🌟 Apne Supabase file ka sahi path yahan daalna (e.g., "@/lib/supabase" ya "../lib/supabase")
+import { supabase } from "@/lib/supabase"; 
 
 export default function ContactUs() {
+  // 🌟 Form inputs ke liye States
+  const [ign, setIgn] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // 🌟 Supabase Data Insert Logic
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Yahan tum apna Supabase ka code daal sakte ho future mein
-    setTimeout(() => {
+    try {
+      const { error } = await supabase
+        .from('support_messages')
+        .insert([
+          { ign: ign, email: email, message: message }
+        ]);
+
+      if (error) {
+        throw error;
+      }
+
+      // Success hone par
       alert("Message sent successfully! Our team will contact you soon.");
+      
+      // Form ko wapas khali kar dena
+      setIgn("");
+      setEmail("");
+      setMessage("");
+
+    } catch (error: any) {
+      alert("Error: " + error.message);
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -46,15 +72,14 @@ export default function ContactUs() {
             <Headphones className="text-indigo-500 w-6 h-6" /> Reach Us Directly
           </h2>
 
-          {/* WhatsApp / Discord Card */}
+          {/* Telegram Card */}
           <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-indigo-500/50 transition-colors">
             <div className="w-12 h-12 bg-emerald-600/20 rounded-xl flex items-center justify-center border border-emerald-500/30 mb-4">
               <MessageSquare className="text-emerald-400 w-6 h-6" />
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Live Chat</h3>
             <p className="text-slate-400 mb-4 text-sm">Fastest way to get help regarding ongoing tournaments.</p>
-            {/* Note: Apna WhatsApp group ya Discord ka link yahan daal dena */}
-            <a href="https://t.me/BattleMasterAdmin" className="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors">
+            <a href="https://t.me/BattleMasterAdmin" target="_blank" rel="noopener noreferrer" className="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors">
               Telegram
             </a>
           </div>
@@ -66,7 +91,6 @@ export default function ContactUs() {
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Email Support</h3>
             <p className="text-slate-400 mb-4 text-sm">For business inquiries or detailed account issues.</p>
-            {/* Note: Apna support email yahan likh dena */}
             <a href="mailto:battlemasterofficial.07@gmail.com" className="text-indigo-400 font-bold hover:underline">
               battlemasterofficial.07@gmail.com
             </a>
@@ -82,6 +106,8 @@ export default function ContactUs() {
               <label className="block text-sm font-bold text-slate-400 mb-2">In-Game Name (IGN)</label>
               <input 
                 type="text" 
+                value={ign}
+                onChange={(e) => setIgn(e.target.value)}
                 placeholder="E.g. Ninja_Killer"
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
                 required
@@ -92,6 +118,8 @@ export default function ContactUs() {
               <label className="block text-sm font-bold text-slate-400 mb-2">Email Address</label>
               <input 
                 type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
                 required
@@ -102,6 +130,8 @@ export default function ContactUs() {
               <label className="block text-sm font-bold text-slate-400 mb-2">Describe your issue</label>
               <textarea 
                 rows={4}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 placeholder="I didn't receive my winning coins for Room #402..."
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all resize-none"
                 required
