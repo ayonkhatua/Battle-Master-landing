@@ -54,8 +54,8 @@ export default function ContactUs() {
             <h3 className="text-xl font-bold text-white mb-2">Live Chat</h3>
             <p className="text-slate-400 mb-4 text-sm">Fastest way to get help regarding ongoing tournaments.</p>
             {/* Note: Apna WhatsApp group ya Discord ka link yahan daal dena */}
-            <a href="#" className="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors">
-              Join Discord Server
+            <a href="https://t.me/BattleMasterAdmin" className="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors">
+              Telegram
             </a>
           </div>
 
@@ -67,8 +67,8 @@ export default function ContactUs() {
             <h3 className="text-xl font-bold text-white mb-2">Email Support</h3>
             <p className="text-slate-400 mb-4 text-sm">For business inquiries or detailed account issues.</p>
             {/* Note: Apna support email yahan likh dena */}
-            <a href="mailto:support@battlemaster.com" className="text-indigo-400 font-bold hover:underline">
-              support@battlemaster.com
+            <a href="mailto:battlemasterofficial.07@gmail.com" className="text-indigo-400 font-bold hover:underline">
+              battlemasterofficial.07@gmail.com
             </a>
           </div>
         </div>
