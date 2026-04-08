@@ -8,7 +8,10 @@ export const metadata: Metadata = {
   // 🌟 Base URL set karna zaroori hai Next.js SEO ke liye
   metadataBase: new URL("https://battlemasterofficial.vercel.app"),
   
-  // 🌟 Google Site Verification (HTML Tag Method)
+  // 🌟 FIX 1: App Name Explicitly define karna
+  applicationName: "Battle Master",
+  
+  // 🌟 Google Site Verification
   verification: {
     google: "1edyY0tW1DIAF74zg2J3DopSll_MQuowKfhYtSRcp6o", 
   },
@@ -26,17 +29,24 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Battle Master Team" }],
   
-  // 🌟 Canonical Link (Duplicate content se bachane ke liye)
+  // 🌟 Canonical Link
   alternates: {
     canonical: "/",
   },
   
-  // 🌟 Open Graph (WhatsApp, Facebook, Discord par share karne par jo preview aata hai)
+  // 🌟 FIX 2: Favicon/Logo Setup (Google search results ke liye)
+  icons: {
+    icon: "/logo.png", 
+    apple: "/logo.png",
+    shortcut: "/logo.png",
+  },
+  
+  // 🌟 Open Graph
   openGraph: {
     title: "Battle Master - Play & Earn",
     description: "The best Free Fire tournament app for mobile gamers. Join daily custom rooms and win real coins per kill!",
     url: "https://battlemasterofficial.vercel.app",
-    siteName: "Battle Master",
+    siteName: "Battle Master", // Ye bhi Google padhta hai
     images: [
       {
         url: "/logo.png", 
@@ -49,7 +59,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   
-  // 🌟 Twitter Card (X/Twitter par share karne ke liye)
+  // 🌟 Twitter Card
   twitter: {
     card: "summary", 
     title: "Battle Master - Free Fire Esports",
@@ -65,6 +75,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* 🌟 FIX 3: JSON-LD Schema (Google ko forcefully Site ka naam batane ki Master Trick) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Battle Master",
+              "url": "https://battlemasterofficial.vercel.app/"
+            })
+          }}
+        />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
