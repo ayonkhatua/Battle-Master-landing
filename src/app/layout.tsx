@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   
   // 🌟 Google Site Verification
   verification: {
-    google: "1edyY0tW1DIAF74zg2J3DopSll_MQuowKfhYtSRcp6o", 
+    google: "OPYp2LzFKHpIK5ZVNAbtUtZDe_r1JlVCTKHE2hN5z5I", 
   },
 
   // 🌟 Primary Meta Tags
